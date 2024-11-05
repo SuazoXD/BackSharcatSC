@@ -1,0 +1,110 @@
+
+
+
+.categoriesTitle {
+  font-size: 1.8rem;
+  color: black;
+  text-align: center; /* Centrar el título */
+  font-weight: bold;
+}
+
+
+/* Tarjetas de categorías */
+.categoryCard {
+  background: linear-gradient(135deg, #f54ea2, #ff7676); /* Fondo con degradado de color */
+  border-radius: 20px; /* Bordes más redondeados */
+  padding: 1.5rem;
+  text-align: center;
+  transition: transform 0.3s, background 0.3s; /* Suavizar la transición de escala y fondo */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* Alinear verticalmente el contenido */
+  height: 160px; /* Ajustar altura para hacerlo más estilizado */
+  width: 100%;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Sombra más pronunciada */
+  cursor: pointer; /* Mostrar cursor de mano en hover */
+}
+
+.categoryCard:hover {
+  transform: translateY(-10px) scale(1.05); /* Levantar y aumentar ligeramente el tamaño en hover */
+  background: linear-gradient(135deg, #42e695, #3bb2b8); /* Cambiar gradiente en hover */
+}
+
+.categoryCard img {
+  max-width: 102px; /* Ajustar el tamaño de las imágenes */
+  height: 102px;
+  margin-bottom: 1rem; /* Separar imagen del texto */
+}
+
+.categoryCard p {
+  font-size: 1.1rem; /* Ajustar el tamaño del texto */
+  color: white;
+  margin-top: 0.5rem;
+  font-weight: 600; /* Hacer que el texto sea más visible */
+}
+/* Modal Overlay */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  width: auto;
+}
+
+/* Modal Content */
+.modalContent {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 90%;
+  min-width: 80%;
+  text-align: center;
+  color: black;
+}
+
+
+.modalContent h2 {
+  margin-bottom: 1rem;
+  font-family: 'Delius', cursive; /* Aplicar la fuente Delius */
+}
+
+.modalContent ul {
+  list-style: none;
+  padding: 0;
+}
+
+.modalContent li {
+  margin: 10px 0;
+}
+
+.closeModalButton {
+  margin-top: 20px;
+  background-color: #f2b6d4;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+/* Subcategorías */
+.subcategoryList {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.subcategoryItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}

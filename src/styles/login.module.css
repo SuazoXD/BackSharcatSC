@@ -1,0 +1,251 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 2rem 1rem;
+    background-image: url('/images/background-image.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+  }
+  .container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #f78f029c; /* Capa de color blanco */
+    opacity: 0.5; /* Ajusta la opacidad según tu preferencia */
+  }
+  
+  .loginBox {
+    background-color: #0f0b30de;
+    padding: 2.5rem;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 400px;
+    width: 100%;
+    margin: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    position: relative;
+  }
+  
+  .sharkCatTitle {
+    font-family: 'Protest Strike', sans-serif;
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    color: #f78f02;;
+    letter-spacing: 0.1em;
+    margin-top: -15px;
+  }
+  
+  .title {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    margin-top: -15px;
+    color: white;
+  }
+  
+  .form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 350px;
+    box-sizing: border-box;
+  }
+  
+  .input {
+    margin-bottom: 1rem;
+    padding: 0.75rem;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    width: 100%;
+    box-sizing: border-box;
+    padding-right: 45px;
+  }
+  
+  .passwordContainer {
+    position: relative;
+    width: 100%;
+  }
+  
+  .showPasswordButton {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: transparent;
+    border: none;
+    color: #2F2A40;
+    cursor: pointer;
+    font-size: 0.875rem;
+  }
+  
+  .showPasswordButton:hover {
+    color: #f889d6;
+  }
+  
+  .eyeIcon {
+    width: 22px;
+    height: 22px;
+  }
+  
+  .checkboxContainer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 1rem;
+  }
+  
+  .checkbox {
+    margin-right: 0.5rem;
+  }
+  
+  .checkboxLabel {
+    font-size: 0.875rem;
+    color: white;
+  }
+  
+  .button {
+    padding: 0.75rem;
+    background-color: #f78f02;
+    color: white;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .button:hover {
+    background-color: #815c28;
+  }
+  
+  .forgotPasswordLink {
+    display: block;
+    margin-top: 1rem;
+    color: white;
+    text-align: center;
+    font-size: 0.875rem;
+  }
+  
+  .forgotPasswordLink:hover {
+    color: #f889d6;
+  }
+  
+  .registerContainer {
+    margin-top: 1rem;
+    text-align: center;
+  }
+  
+  .registerLink {
+    color: white;
+  }
+  
+  .registerLink:hover {
+    color: #f889d6;
+  }
+  
+  /* Logo principal */
+  .loginImage {
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Imagen más pequeña (gatito) cuando se ingresa la contraseña */
+  .smallLogo {
+    width: 80px; /* Ajustamos el tamaño a 80px */
+    height: auto;
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Botón Home dentro del contenedor en la esquina superior derecha */
+  .homeButton {
+    position: absolute;
+    top: 10px; /* Ajusta la distancia desde la parte superior del contenedor */
+    right: 10px; /* Ajusta la distancia desde la parte derecha del contenedor */
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease;
+    z-index: 1;
+  }
+  
+  .homeButton:hover {
+    background-color: #f889d6;
+  }
+  
+  .homeIcon {
+    width: 24px;
+    height: 24px;
+  }
+  
+  /* Ventana emergente (pop-up) */
+  .popupOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .popup {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    max-width: 400px;
+    width: 100%;
+  }
+  
+  .closeButton {
+    padding: 0.75rem 1.5rem;
+    background-color: #2F2A40;
+    color: white;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: background-color 0.3s ease;
+  }
+  
+  .closeButton:hover {
+    background-color: #f889d6;
+  }
+  #text{
+    text-align: center;
+  }
+  .errorMessage {
+    color: #f889d6;
+    font-size: 12px;
+    margin-top: 5px;
+  }
+  
+  .labelPink {
+    color: #f889d6;
+  }
