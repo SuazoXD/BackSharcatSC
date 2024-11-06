@@ -1,12 +1,12 @@
 "use client"
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import ProfileTutor from "./tutorProfile";
+import ProfileTutor from "./tutor/tutorProfile";
 import { useEffect, useState } from "react";
 import { userPayload } from "../interfaces/userPayload-int";
 import { jwtDecode } from "jwt-decode";
-import ActualizarInfoPupilo from "./modificarPerfil-pupilo";
-import ProfileCard from "./cardProfile";
+import ActualizarInfoPupilo from "./pupilo/modificarPerfil-pupilo";
+import ProfileCard from "./pupilo/cardProfile";
 
 export default function ProfileTutorPage() {
 

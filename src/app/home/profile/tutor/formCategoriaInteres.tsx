@@ -1,8 +1,8 @@
 "use client"
 
 import { useEffect, useState } from "react";
-import { Categoria, Materia, MateriaTutor } from "../../home/interfaces/categories";
-import { getCategories } from "../home.api";
+import { Categoria, Materia, MateriaTutor } from "../../interfaces/categories";
+import { getCategories } from "../../home.api";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";

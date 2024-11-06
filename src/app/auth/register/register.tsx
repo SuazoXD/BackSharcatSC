@@ -162,6 +162,10 @@ export default function Register() {
             {firstStepForm.formState.errors.correo && (
               <span className="text-red-500 text-sm">{firstStepForm.formState.errors.correo.message}</span>
             )}
+            <div className="flex justify-end">
+              <span className="text-sm text-gray-600">¿Ya tienes una cuenta?</span>
+              <a href="/auth/login" className="text-sm ml-1 text-blue-700">Inicia sesion</a>
+            </div>
             <Button type="submit" className="w-full bg-blue-500 hover:bg-blue-600">
               Continuar
             </Button>

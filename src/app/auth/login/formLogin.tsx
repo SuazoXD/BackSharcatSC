@@ -6,6 +6,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import {z} from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
+import { Link } from "lucide-react";
 
 const loginSchema = z.object({
     correo: z
@@ -80,7 +81,10 @@ export default function FormLogin() {
               />
               {errors.password && <p className="text-red-500 text-sm">{errors.password.message}</p>}
             </div>
-            
+            <div className="flex justify-end">
+              <span className="text-sm text-gray-600">¿No tienes una cuenta?</span>
+              <a href="/auth/register" className="text-sm ml-1 text-blue-700">Registrate</a>
+            </div>
             <div className="flex justify-center">
               <Button type="submit" className="w-full bg-blue-500 hover:bg-blue-600">Log in</Button>
             </div>
