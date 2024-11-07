@@ -2,7 +2,7 @@ export interface OfferCreate{
     idPregunta?: number;
     idEstadoOferta?: number;
     descripcion: string;
-    fechaOferta?: any;
+    fechaOferta?:string;
 }
 
 export interface Offer{
@@ -13,7 +13,7 @@ export interface Offer{
     };
     idPregunta: number;
     descripcion: string;
-    fechaOferta?: any;
+    fechaOferta?: string;
     usuario: {
         valoracion?: number,
         correo?: string,

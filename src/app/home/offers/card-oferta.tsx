@@ -22,7 +22,7 @@ const OfferCard: React.FC<CompleteOfferCardProp> = ({offer}) => {
         router.push(`/home/profile/profile-guest?tutor=${idTutor}`)
     }
 
-    const handleOfferClick = (offer: any) => {
+    const handleOfferClick = (offer: Offer) => {
         setSelectedOffer(offer);
         setIsOpen(true);
     }

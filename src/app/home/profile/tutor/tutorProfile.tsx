@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { Dot } from "lucide-react";
 import FormCategoriaMateria from "./formCategoriaInteres";
+import { UserProfile } from "../../interfaces/UserProfile";
 
 interface PerfilTutor {
   primerNombre?: string;
@@ -15,12 +16,6 @@ interface PerfilTutor {
   correo?: string;
   edad?: number;
   foto?: File | null;
-}
-
-interface Materia {
-  nombre: string;
-  categoria: string;
-  descripcion: string;
 }
 
 interface Conocimiento {
@@ -43,7 +38,6 @@ const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 export default function PerfilTutor() {
   const { register, handleSubmit, setValue } = useForm<PerfilTutor>();
   const [foto, setFoto] = useState<File | null>(null);
-  const [vistaPreviaFoto, setVistaPreviaFoto] = useState<string | null>(null);
   const [pestañaActiva, setPestañaActiva] = useState("datosPersonales");
   const [nombreMostrado, setNombreMostrado] = useState("Nombre Apellido");
   const [correoMostrado, setCorreoMostrado] = useState("correo@example.com");
@@ -51,13 +45,11 @@ export default function PerfilTutor() {
   const [token, setToken] = useState<string | null>(null);
   const [esEditable, setEsEditable] = useState(false);
   const [valoracion, setValoracion] = useState(4); // Valoración del tutor
-  const [comentarios, setComentarios] = useState<string[]>([]); // Comentarios
   const [profilePhoto, setProfilePhoto] = useState<string | null>("https://via.placeholder.com/150");
 
   const [profileData, setProfileData] = useState<UserProfile | null>(null);
 
   // Estados separados para cada sección
-  const [materias, setMaterias] = useState<Materia[]>([]);
   const [conocimientos, setConocimientos] = useState<Conocimiento[]>([]);
   const [experiencias, setExperiencias] = useState<Experiencia[]>([]);
 
@@ -97,6 +89,7 @@ export default function PerfilTutor() {
           setValue("correo", data.correo);
           setValue("edad", data.edad);
           setProfilePhoto(data.fotoPerfil);
+          setValoracion(data.valoracion);
           setNombreMostrado(
             `${data.nombre.primerNombre || ""} ${data.nombre.primerApellido || ""}`.trim()
           );
@@ -139,9 +132,6 @@ export default function PerfilTutor() {
     }
   };
 
-  const agregarMateria = (materia: Materia) => {
-    setMaterias((prev) => [...prev, materia]);
-  };
 
   const agregarConocimiento = (conocimiento: Conocimiento) => {
     setConocimientos((prev) => [...prev, conocimiento]);
@@ -155,7 +145,6 @@ export default function PerfilTutor() {
     if (e.target.files && e.target.files[0]) {
       const fotoSeleccionada = e.target.files[0];
       setFoto(fotoSeleccionada);
-      setVistaPreviaFoto(URL.createObjectURL(fotoSeleccionada));
     }
   };
 
@@ -197,7 +186,7 @@ export default function PerfilTutor() {
         {/* Sección de comentarios */}
         <div className="mt-4">
           <h3 className="font-medium text-gray-700">Comentarios:</h3>
-          {comentarios.length > 0 ? (
+          {/* {comentarios.length > 0 ? (
             comentarios.map((comentario, index) => (
               <p key={index} className="text-sm text-gray-600 mt-1">
                 {comentario}
@@ -205,7 +194,7 @@ export default function PerfilTutor() {
             ))
           ) : (
             <p className="text-sm text-gray-500">Sin comentarios aún.</p>
-          )}
+          )} */}
         </div>
       </div>
 
@@ -285,15 +274,6 @@ export default function PerfilTutor() {
           <div className="space-y-4">
             {/* Materias */}
             <FormCategoriaMateria/>
-
-            {/* Mostrar las materias guardadas */}
-            {materias.map((materia, index) => (
-              <div key={index} className="bg-gray-100 p-2 rounded">
-                <p className="font-medium">{materia.nombre}</p>
-                <p>{materia.categoria}</p>
-                <p className="text-sm text-gray-600">{materia.descripcion}</p>
-              </div>
-            ))}
           </div>
         ) : pestañaActiva === "conocimientos" ? (
           <div className="space-y-4">

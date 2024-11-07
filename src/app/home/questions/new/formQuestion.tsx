@@ -6,7 +6,6 @@ import { Input } from "@/components/ui/input";
 import { SubmitHandler, useForm } from "react-hook-form";
 import React, { useState, useEffect } from "react"
 import { useRouter, useSearchParams } from "next/navigation";
-import { number } from "zod";
 import { Categoria, Materia } from "../../interfaces/categories";
 
 interface Pregunta{

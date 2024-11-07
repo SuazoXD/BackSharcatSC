@@ -5,7 +5,7 @@ import { jwtDecode } from 'jwt-decode';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { SIDENAV_ITEMS, SIDENAV_PUPIL_ITEMS } from '@/constants';
-import { SideNavItem, MenuItemWithSubMenuProps } from '@/types';
+import { MenuItemWithSubMenuProps } from '@/types';
 import { Icon } from '@iconify/react';
 import { motion, useCycle } from 'framer-motion';
 

@@ -100,6 +100,7 @@ export default function Register() {
     } catch (error) {
       setMessage("Error en el registro. Inténtalo de nuevo.");
       setShowPopup(true);
+      console.log(error);
     }
   };
 
@@ -123,6 +124,7 @@ export default function Register() {
     } catch (error) {
       setMessage("Error al validar el código.");
       setShowPopup(true);
+      console.log(error);
     }
   };
 

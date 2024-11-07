@@ -6,7 +6,6 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import {z} from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
-import { Link } from "lucide-react";
 
 const loginSchema = z.object({
     correo: z
@@ -25,7 +24,7 @@ const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 export default function FormLogin() {
     const router = useRouter();
 
-    const { register, handleSubmit, reset, formState: { errors } } = useForm<loginDto>({
+    const { register, handleSubmit, formState: { errors } } = useForm<loginDto>({
         resolver: zodResolver(loginSchema),
     });
 

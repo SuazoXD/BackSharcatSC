@@ -27,10 +27,8 @@ const apiUrl = process.env.NEXT_PUBLIC_API_URL; // Definimos apiUrl
 export default function ProfileCard({ onEditClick }: ProfileCardProps) {
     const { register, handleSubmit, setValue } = useForm<ProfileData>();
     const [profilePhoto, setProfilePhoto] = useState<string>("https://via.placeholder.com/150");
-    const [token, setToken] = useState<string | null>(null);
     const [message, setMessage] = useState<string>("Cargando detalles del perfil...");
     const [valoracion, setValoracion] = useState<number>(0); // Estado para la valoración
-    const [profileData, setProfileData] = useState<ProfileData | null> (null);
 
     // useEffect para obtener el token al cargar la página y realizar la solicitud GET
     useEffect(() => {
@@ -44,8 +42,6 @@ export default function ProfileCard({ onEditClick }: ProfileCardProps) {
                 }, 3000);
                 return;
             }
-
-            setToken(access_token);
 
             // Realizar la solicitud GET usando fetch con apiUrl
             fetch(`${apiUrl}/user/profile`, {

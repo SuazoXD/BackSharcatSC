@@ -24,7 +24,6 @@ const apiUrl = process.env.NEXT_PUBLIC_API_URL; // Definimos apiUrl
 export default function ActualizarInfoPupilo({ onGoBack }: ActualizarInfoPupiloProps) {
     const { register, handleSubmit, setValue } = useForm<ProfileData>();
     const [profilePhoto, setProfilePhoto] = useState<string>("https://via.placeholder.com/150");
-    const [token, setToken] = useState<string | null>(null);
     const [message, setMessage] = useState<string>("Cargando detalles del perfil...");
 
     useEffect(() => {
@@ -38,8 +37,6 @@ export default function ActualizarInfoPupilo({ onGoBack }: ActualizarInfoPupiloP
                 }, 3000);
                 return;
             }
-
-            setToken(access_token);
 
             // Realizar la solicitud GET usando apiUrl
             fetch(`${apiUrl}/user/profile`, {

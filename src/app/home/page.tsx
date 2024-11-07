@@ -9,7 +9,7 @@ import QuestionCardDialog from './QuestionCardDialog';
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
-export default function homePage(){
+export default function HomePage(){
     
     const [questions, setQuestions] = useState<Question[]>([]);;
     const [userData, setUserData] = useState<userPayload | null>(null)

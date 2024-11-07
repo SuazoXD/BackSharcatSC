@@ -3,7 +3,7 @@ export interface Question{
     idUsuarioPupilo: number;
     titulo: string;
     descripcion: string;
-    fechaPublicacion: any;
+    fechaPublicacion: string;
     idEstadoPregunta: number;
     materia: {
         materia: string
@@ -19,7 +19,7 @@ export interface Question{
         },
         idPregunta: number,
         descripcion: string,
-        fechaOferta: any,
+        fechaOferta: string,
         usuario: {
             idUsuario: number,
             fotoPerfil: string,
@@ -30,5 +30,3 @@ export interface Question{
         }
     }[];
 }
-
-type ofertareSolucion = Pick<Question, "ofertaresolucion">;

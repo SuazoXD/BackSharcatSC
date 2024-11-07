@@ -1,4 +1,4 @@
-interface UserProfile {
+export interface UserProfile {
     nombre: {
         idNombre: number;
         primerNombre: string;
@@ -12,14 +12,14 @@ interface UserProfile {
     telefono: string;
     valoracion: number;
     fotoPerfil: string;
-    horarioDisponibleInicio: any;
-    horarioDisponibleFin: any;
+    horarioDisponibleInicio: string;
+    horarioDisponibleFin: string;
     rol: {
         idRol: number;
         rol: string;
     };
-    experiencia?: any[];
-    conocimiento?: any[];
+    experiencia?: [];
+    conocimiento?: [];
     materia_tutor?:{
         materia: {
             idMateria: number;

@@ -1,5 +1,4 @@
 import React from "react";
-import Navbar from "@/components/navBar";
 import Header from "@/components/sidebar/header";
 import HeaderMobile from "@/components/sidebar/header-mobile";
 import SideNav from "@/components/sidebar/side-nav";

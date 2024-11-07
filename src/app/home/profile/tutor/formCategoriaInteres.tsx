@@ -16,7 +16,7 @@ export default function FormCategoriaMateria() {
 
     const router = useRouter();
 
-    const {register, handleSubmit, reset, setValue} = useForm<MateriaTutor>();
+    const {register, handleSubmit, reset} = useForm<MateriaTutor>();
 
     // Llenar las categorias
     useEffect(()=>{
