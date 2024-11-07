@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { Bell } from 'lucide-react';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -11,21 +10,11 @@ const Navbar = () => {
         <nav className="bg-blue-500 text-white fixed top-0 w-full z-10 absolute">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <Link href="/home" className="text-2xl font-bold">SharkCat</Link>
+          <Link href="/" className="text-2xl font-bold">SharkCat</Link>
           <div className="hidden md:flex items-center space-x-4">
-            <Link href="/home" className="hover:bg-blue-700 px-3 py-2 rounded-md text-sm font-medium">Inicio</Link>
-            <Link href="/home" className="hover:bg-blue-700 px-3 py-2 rounded-md text-sm font-medium">Acerca</Link>
-            <Link href="/home/questions/new" className="hover:bg-blue-700 px-3 py-2 rounded-md text-sm font-medium">Contacto</Link>
-            <Link href="/home">
-                <Bell className='' />   
-            </Link>
-            <Link href="/profile">
-              <img
-                src="/img/profile.png"
-                alt="Perfil"
-                className="w-9 h-9 rounded-full"
-              />
-            </Link>
+            <Link href="/auth/login" className="hover:bg-blue-700 px-3 py-2 rounded-md text-sm font-medium">Login</Link>
+            <Link href="/" className="hover:bg-blue-700 px-3 py-2 rounded-md text-sm font-medium">Acerca</Link>
+            
           </div>
           <div className="-mr-2 flex md:hidden">
             <button
@@ -51,11 +40,8 @@ const Navbar = () => {
       {isOpen && (
         <div className="md:hidden">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            <Link href="/home" className="hover:bg-blue-700 block px-3 py-2 rounded-md text-base font-medium">Inicio</Link>
-            <Link href="/home" className="hover:bg-blue-700 block px-3 py-2 rounded-md text-base font-medium">Acerca</Link>
-            <Link href="/home/questions/new" className="hover:bg-blue-700 block px-3 py-2 rounded-md text-base font-medium">Contacto</Link>
-            <Link href="/profile" className="hover:bg-blue-700 block px-3 py-2 rounded-md text-base font-medium">Perfil</Link>
-            <Link href="/home" className="hover:bg-blue-700 block px-3 py-2 rounded-md text-base font-medium">notificaciones</Link>
+            <Link href="/auth/login" className="hover:bg-blue-700 block px-3 py-2 rounded-md text-base font-medium">Login</Link>
+            <Link href="/" className="hover:bg-blue-700 block px-3 py-2 rounded-md text-base font-medium">Acerca</Link>
           </div>
         </div>
       )}

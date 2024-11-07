@@ -1,0 +1,277 @@
+@import url('https://fonts.googleapis.com/css2?family=Protest+Strike&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Delius&display=swap');
+
+/* Header */
+.header {
+  background-color: #2F2A40;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  color: white;
+}
+
+.main {
+  padding: 3rem 5rem; /* Aumentar el padding para más espacio respecto a la página */
+  background-color: #f8f8f8;
+  color: black;
+  text-align: center;
+}
+
+.subtitle {
+  font-size: 2rem;
+  color: black;
+  font-family: 'Delius', cursive; /* Aplicar la fuente Delius */
+  font-weight: bold;
+}
+
+.description {
+  margin: 0 0 2rem;
+  color: black;
+  font-size: 1.2rem;
+  font-family: 'Delius', cursive; /* Aplicar la fuente Delius */
+}
+
+/* Categorías */
+.categoriesSection {
+  margin-bottom: 4rem;
+}
+
+.categoriesTitle {
+  font-size: 1.8rem;
+  color: black;
+  text-align: center; /* Centrar el título */
+  font-family: 'Delius', cursive; /* Aplicar la fuente Delius */
+  font-weight: bold;
+}
+
+.categoryGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Mantener 4 columnas */
+  gap: 30px; /* Aumentar el espacio entre las tarjetas */
+  margin-top: 2rem; /* Aumentar el margen superior */
+}
+
+/* Tarjetas de categorías */
+.categoryCard {
+  background: linear-gradient(135deg, #f54ea2, #ff7676); /* Fondo con degradado de color */
+  border-radius: 20px; /* Bordes más redondeados */
+  padding: 1.5rem;
+  text-align: center;
+  transition: transform 0.3s, background 0.3s; /* Suavizar la transición de escala y fondo */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* Alinear verticalmente el contenido */
+  height: 160px; /* Ajustar altura para hacerlo más estilizado */
+  width: 100%;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Sombra más pronunciada */
+  margin: 20px;
+  cursor: pointer; /* Mostrar cursor de mano en hover */
+}
+
+.categoryCard:hover {
+  transform: translateY(-10px) scale(1.05); /* Levantar y aumentar ligeramente el tamaño en hover */
+  background: linear-gradient(135deg, #42e695, #3bb2b8); /* Cambiar gradiente en hover */
+}
+
+.categoryCard img {
+  max-width: 102px; /* Ajustar el tamaño de las imágenes */
+  height: 102px;
+  margin-bottom: 1rem; /* Separar imagen del texto */
+}
+
+.categoryCard p {
+  font-size: 1.1rem; /* Ajustar el tamaño del texto */
+  color: white;
+  margin-top: 0.5rem;
+  font-weight: 600; /* Hacer que el texto sea más visible */
+}
+
+/* Modal Overlay */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Modal Content */
+.modalContent {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  width: 400px;
+  max-width: 80%;
+  text-align: center;
+  color: black;
+}
+
+.modalContent h2 {
+  margin-bottom: 1rem;
+  font-family: 'Delius', cursive; /* Aplicar la fuente Delius */
+}
+
+.modalContent ul {
+  list-style: none;
+  padding: 0;
+}
+
+.modalContent li {
+  margin: 10px 0;
+}
+
+.closeModalButton {
+  margin-top: 20px;
+  background-color: #f2b6d4;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+/* Subcategorías */
+.subcategoryList {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.subcategoryItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.subcategoryItem p {
+  margin: 0;
+  font-size: 1.2rem;
+}/* Carrusel */
+.carouselSection {
+  margin-bottom: 4rem;
+  width: 100%;
+  height: 300px; /* Altura fija del carrusel */
+  display: grid;
+  grid-template-columns: 40% 60%; /* El texto ocupa el 40%, la imagen el 60% */
+  align-items: center; /* Centrar verticalmente el contenido dentro de las celdas */
+  background-color: #F0F2F5; /* Fondo claro para el carrusel */
+  border-radius: 20px; /* Borde redondeado para el contenedor del carrusel */
+  overflow: hidden; /* Asegurar que todo quede dentro del contenedor */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Añadir sombra */
+}
+
+.carouselTitle {
+  font-size: 16px;
+  color: #322C58;
+  font-family: 'Delius', cursive;
+  text-align: left;
+  padding: 2rem; /* Aumentar padding para más espacio alrededor del texto */
+  line-height: 1.5; /* Espacio entre líneas */
+}
+
+.imageContainer {
+  width: 100%;
+  height: 100%; /* Mantener el contenedor de la imagen con altura fija */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.imageContainer img {
+  width: 100%;
+  height: 100%; /* Asegurar que la imagen ocupe toda la altura del contenedor */
+  object-fit: cover; /* Asegurar que la imagen cubra todo el contenedor, manteniendo proporciones */
+  border-radius: 0px 20px 20px 0px; /* Bordes redondeados solo para la parte derecha del contenedor de la imagen */
+  max-height: 300px; /* Fijar la altura máxima para las imágenes */
+  min-height: 300px; /* Mantener una altura mínima */
+  overflow: hidden;
+}
+
+/* Ajuste adicional para la responsividad del carrusel */
+@media (max-width: 768px) {
+  .carouselSection {
+    grid-template-columns: 1fr; /* Colapsar en una columna para pantallas pequeñas */
+    height: auto; /* Permitir que la altura se ajuste automáticamente en pantallas pequeñas */
+  }
+
+  .carouselTitle {
+    width: 100%;
+    padding: 1rem;
+    text-align: center;
+  }
+
+  .imageContainer {
+    height: 200px; /* Ajustar la altura para pantallas pequeñas */
+  }
+
+  .imageContainer img {
+    max-height: 200px; /* Ajustar la altura máxima en pantallas pequeñas */
+    min-height: 200px;
+  }
+}
+
+
+/* Footer */
+.footer {
+  background-color: #F2E9E4;
+  padding: 40px 0;
+}
+
+.footerLinks {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px;
+}
+
+.footerLinks h4 {
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+  color: #2F2A40;
+}
+
+.footerCopy {
+  text-align: center;
+  font-size: 0.9rem;
+  color: #2F2A40;
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+  .categoryGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .carouselSection {
+    width: 100%;
+  }
+
+  .main {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .categoryGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .carouselSection {
+    width: 100%;
+  }
+
+  .main {
+    padding: 1rem;
+  }
+}
