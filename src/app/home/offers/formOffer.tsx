@@ -13,7 +13,7 @@ type newOfferProps = {
     updateQuestions: () => void;
 }
 
-const apiUrl = process.env.BACKEN_API;
+const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
 const FormOferta: React.FC<newOfferProps> = ({idPregunta, updateQuestions}) => {
 

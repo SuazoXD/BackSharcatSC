@@ -20,7 +20,7 @@ const loginSchema = z.object({
 
 type loginDto = z.infer<typeof loginSchema>
 
-const apiUrl = process.env.BACKEN_API;
+const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
 export default function FormLogin() {
     const router = useRouter();

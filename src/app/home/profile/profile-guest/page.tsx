@@ -5,7 +5,7 @@ import { Dot, Star } from "lucide-react";
 import { useSearchParams } from "next/navigation"
 import { useEffect, useState } from "react";
 
-const apiUrl = process.env.BACKEN_API;
+const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 export default function Guest(){
     const searchParams = useSearchParams();
     const idTutor = searchParams.get('tutor');

@@ -1,4 +1,4 @@
-const apiUrl = process.env.BACKEN_API;
+const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 const access_token = typeof window !== "undefined" ? sessionStorage.getItem('access_token') : null;
 
 // Obtener preguntas pupilo

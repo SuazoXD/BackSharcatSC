@@ -6,7 +6,7 @@ import { getCategories } from "../../home.api";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
-const apiUrl = process.env.BACKEN_API;
+const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
 export default function FormCategoriaMateria() {
     const [categories, setCategories] = useState<Categoria[]>([]);

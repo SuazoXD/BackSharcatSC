@@ -19,7 +19,7 @@ interface ActualizarInfoPupiloProps {
     onGoBack: () => void;
 }
 
-const apiUrl = process.env.BACKEN_API; // Definimos apiUrl
+const apiUrl = process.env.NEXT_PUBLIC_API_URL; // Definimos apiUrl
 
 export default function ActualizarInfoPupilo({ onGoBack }: ActualizarInfoPupiloProps) {
     const { register, handleSubmit, setValue } = useForm<ProfileData>();

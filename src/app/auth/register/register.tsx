@@ -43,7 +43,7 @@ type FirstStepData = z.infer<typeof firstStepSchema>;
 type SecondStepData = z.infer<typeof secondStepSchema>;
 type ThirdStepData = z.infer<typeof thirdStepSchema>;
 
-const apiUrl = process.env.BACKEN_API;
+const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
 export default function Register() {
   const [step, setStep] = useState(1);
