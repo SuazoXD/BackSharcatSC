@@ -10,6 +10,8 @@ type CompleteOfferCardProp = {
     offer: Offer
 }
 
+const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+
 const OfferCard: React.FC<CompleteOfferCardProp> = ({offer}) => {
 
     const [selectedOffer, setSelectedOffer] = useState<Offer | null>(null);
@@ -29,6 +31,37 @@ const OfferCard: React.FC<CompleteOfferCardProp> = ({offer}) => {
             console.log("Oferta seleccionada:", selectedOffer);
         }
     }, [selectedOffer]);
+
+    const handleAcceptOffer = async (idOferta: number) => {
+        try {
+
+            const access_token = sessionStorage.getItem("access_token");
+
+            if(!access_token){
+                console.error("Token no encontrado");
+            }
+
+            const res = await fetch(`${apiUrl}/user/pregunta/aceptar-oferta`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${access_token}`
+                },
+                body: JSON.stringify({idOferta})
+            });
+
+            if(!res.ok){
+                console.log("error al actualizar estado de la oferta");
+            } else {
+                console.log("Estado de la pregunta actualizado correctamente");
+                setIsOpen(false);
+
+            }
+
+        } catch (error) {
+            console.error(`Error handleAcceptOffer ${error}`);
+        }
+    }
 
     return (
         <>
@@ -91,6 +124,13 @@ const OfferCard: React.FC<CompleteOfferCardProp> = ({offer}) => {
                                 <p>
                                     {offer.estadoOfertaSolucion?.estadoOferta}
                                 </p>
+                            </div>
+                            <div className='border my-3'>
+                            </div>
+                            <div className='flex w-full justify-center'>
+                                {offer.estadoOfertaSolucion?.idEstadoOferta === 1 && (
+                                    <Button onClick={() => handleAcceptOffer(offer.idOferta)}>Aceptar</Button>
+                                )}
                             </div>
                         </DialogContent>
                     </DialogOverlay>

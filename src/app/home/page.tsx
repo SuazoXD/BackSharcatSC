@@ -3,23 +3,19 @@
 import { jwtDecode } from 'jwt-decode';
 import { useEffect, useState } from "react";
 import { getQuestionsPupilo, getQuestionsByTutorInteres } from "./home.api";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@radix-ui/react-dialog";
-import { DialogOverlay, DialogPortal } from "@radix-ui/react-dialog";
-import { DialogHeader } from "@/components/ui/dialog";
-import Carousel from "@/components/ui/carousel";
 import { Question } from "./interfaces/question-interface";
 import { userPayload } from "./interfaces/userPayload-int";
-import QuestionOffers from './offers/questionOffers';
+import QuestionCardDialog from './QuestionCardDialog';
+
+const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
 export default function homePage(){
     
-    const [isOpen, setIsOpen] = useState(false);
-    const [selectedQuestion, setSelectedQuestion] = useState<Question | null>(null);
     const [questions, setQuestions] = useState<Question[]>([]);;
     const [userData, setUserData] = useState<userPayload | null>(null)
     const [token, setToken] = useState<string | null>(null);
-    
+    const [acceptedQuestions, setAcceptedQuestions] = useState<Question[]>([]);
+
     const fetchQuestions = async (role: number) => {
         try {
             let data: Question[] = [];
@@ -34,6 +30,34 @@ export default function homePage(){
         }
     };
     
+    // Obtener preguntas con oferta aceptada de tutor
+    useEffect(() => {
+        try {
+            if(token){
+                const fetchAcceptedQuestions = async () => {
+                    const res = await fetch(`${apiUrl}/user/pregunta/tutor/oferta-aceptada`,{
+                        method: "GET",
+                        headers:{
+                            "Content-type": "application/json",
+                            "Authorization": `Bearer ${token}`
+                        }
+                    });
+
+                    if(!res.ok){
+                        console.error("Error al obtener preguntas aceptadas");
+                    }
+
+                    const data: Question[] = await res.json();
+                    setAcceptedQuestions(data);
+                }
+
+                fetchAcceptedQuestions();
+            }
+        } catch (error) {
+            console.error(`Error al obtener las preguntas aceptadas ${error}`);
+        }
+    }, [token]);
+
     // refrescar
     const updateQuestions = async () => {
         if (userData) {
@@ -72,12 +96,40 @@ export default function homePage(){
         }
     }, [userData]);
 
-    const handleCardClick = (question: any) => {
-        setSelectedQuestion(question);
-        setIsOpen(true);
-    };
     return (
         <>  
+
+            {userData?.rol === 1 && acceptedQuestions.length > 0 && (
+                <>
+                    <div className="flex justify-center p-4 text-2xl">OFERTAS ACEPTADAS</div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 justify-center">
+                        {acceptedQuestions.map((question) => (
+                            <QuestionCardDialog
+                                key={question.idPregunta}
+                                question={question}
+                                userData={userData}
+                                updateQuestions={updateQuestions}
+                            />
+                        ))}
+                    </div>
+                </>
+            )}
+            {userData?.rol === 2 && acceptedQuestions.length > 0 && (
+                <>
+                    <div className="flex justify-center p-4 text-2xl">PREGUNTAS EN PROCESO</div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 justify-center">
+                        {acceptedQuestions.map((question) => (
+                            <QuestionCardDialog
+                                key={question.idPregunta}
+                                question={question}
+                                userData={userData}
+                                updateQuestions={updateQuestions}
+                            />
+                        ))}
+                    </div>
+                </>
+            )}
+
             {userData?.rol === 1 && (
                 <div className="flex justify-center p-4 text-2xl">PREGUNTAS RECOMENDADAS</div>
             )}
@@ -88,60 +140,19 @@ export default function homePage(){
             {/* CARD */}
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 justify-center">
-        
-            {questions.length > 0 ? (
-            questions.map((question) => (
-                <Card key={question.idPregunta} onClick={() => handleCardClick(question)} className="m-2 overflow-hidden shadow cursor-pointer">
-                    <CardHeader>
-                        <CardTitle className="flex justify-between">
-                            {question.titulo}
-                            <span className="text-xs">{question.materia.materia}</span>
-                        </CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                        <p className="line-clamp-3 overflow-hidden">
-                            {question.descripcion}
-                        </p>
-                        <p className="pt-3">{new Date(question.fechaPublicacion).toLocaleString()}</p>
-                    </CardContent>
-                </Card>
-            ))
-            ) : (
-                <div key="no-questions" className="text-center p-4">No hay preguntas disponibles</div>
-            )}
-
-            {/* DIALOG DETAIL */}
-            <Dialog open={isOpen} onOpenChange={setIsOpen}>
-            <DialogPortal>
-                <DialogOverlay className="fixed inset-0 bg-black bg-opacity-50" />
-                    <DialogContent
-                        className={`fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-6 max-w-[80vh] rounded-xl sm:max-w-2xl w-full
-                            outline-none max-h-[90vh] sm:max-h-[85vh] overflow-y-scroll
-                        }`}
-                        >
-                        <DialogHeader>
-                            <DialogTitle className="font-bold text-center">{selectedQuestion?.titulo}</DialogTitle>
-                                <div className="w-full border"></div>
-                            <DialogDescription className="text-justify">{selectedQuestion?.descripcion}</DialogDescription>
-                        </DialogHeader>
-                        <div className="w-full border my-2"></div>
-                        {/* Carrusel de imágenes */}
-                        {selectedQuestion?.imgpregunta && selectedQuestion.imgpregunta.length > 0 && (
-                            <Carousel images={selectedQuestion.imgpregunta.map(img => img.img)} />
-                        )}
-                        <p className=" text-sm mt-6">
-                            Materia: {selectedQuestion?.materia.materia}
-                        </p>
-                        <p className="text-sm">
-                            Fecha de publicación: {new Date(selectedQuestion?.fechaPublicacion).toLocaleString()}
-                        </p>
-                        <div className="w-full border my-2"></div>
-                        <QuestionOffers userData={userData} selectedQuestion={selectedQuestion} updateQuestions={updateQuestions}></QuestionOffers>
-                    </DialogContent>
-                </DialogPortal>
-            </Dialog>
-        </div>
-
+                {questions.length > 0 ? (
+                questions.map((question) => (    
+                    <QuestionCardDialog 
+                        key={question.idPregunta}
+                        question={question}
+                        userData={userData}
+                        updateQuestions={updateQuestions}    
+                    />    
+                ))
+                ) : (
+                    <div key="no-questions" className="text-center p-4">No hay preguntas disponibles</div>
+                )}
+            </div>
         </>
     )
 }

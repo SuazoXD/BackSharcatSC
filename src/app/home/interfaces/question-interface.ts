@@ -4,6 +4,7 @@ export interface Question{
     titulo: string;
     descripcion: string;
     fechaPublicacion: any;
+    idEstadoPregunta: number;
     materia: {
         materia: string
     };
