@@ -15,7 +15,7 @@ interface Pregunta{
     descripcion: string,
 }
 
-const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+const apiUrl = process.env.BACKEN_API;
 export default function FormQuestion(){
 
     const [categories, setCategories] = useState<Categoria[]>([]);

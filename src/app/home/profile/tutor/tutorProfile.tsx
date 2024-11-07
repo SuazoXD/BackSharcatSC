@@ -38,7 +38,7 @@ interface Experiencia {
   descripcion: string;
 }
 
-const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+const apiUrl = process.env.BACKEN_API;
 
 export default function PerfilTutor() {
   const { register, handleSubmit, setValue } = useForm<PerfilTutor>();

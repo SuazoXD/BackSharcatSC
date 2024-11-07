@@ -19,7 +19,7 @@ interface Subcategory {
   imgMateria: string;
 }
 
-const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+const apiUrl = process.env.BACKEN_API;
 export default function GalleryCategories() {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [currentCategory, setCurrentCategory] = useState<Category | null>(null);

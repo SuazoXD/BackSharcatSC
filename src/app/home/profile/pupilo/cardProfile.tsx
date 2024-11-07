@@ -22,7 +22,7 @@ interface ProfileCardProps {
     onEditClick: () => void; // Definir la prop onEditClick
 }
 
-const apiUrl = process.env.NEXT_PUBLIC_API_URL; // Definimos apiUrl
+const apiUrl = process.env.BACKEN_API; // Definimos apiUrl
 
 export default function ProfileCard({ onEditClick }: ProfileCardProps) {
     const { register, handleSubmit, setValue } = useForm<ProfileData>();
