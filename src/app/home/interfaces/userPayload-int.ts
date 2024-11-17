@@ -3,6 +3,7 @@ export interface userPayload {
     username: string;
     rol: number;
     profilePhoto: string;
+    scToken?: string;
     iat: number;
     exp: number;
 }

@@ -5,6 +5,7 @@ import { OfferCreate } from "../interfaces/oferta";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { toast } from "react-toastify";
+import RouteGuard from "@/components/routeGuard";
 
 type newOfferProps = {
     idPregunta?: number;
@@ -40,10 +41,6 @@ const FormOferta: React.FC<newOfferProps> = ({idPregunta, updateQuestions}) => {
         }
 
         const accessToken = sessionStorage.getItem('access_token');
-        if(!accessToken){
-            console.error("Token no encontrado");
-            return
-        }
 
         try {
             const res = await fetch(`${apiUrl}/user/pregunta/send-offer`, {
@@ -80,14 +77,16 @@ const FormOferta: React.FC<newOfferProps> = ({idPregunta, updateQuestions}) => {
 
     return(
         <>
-            <form className="flex" onSubmit={handleSubmit(onSubmit)}>
-                <Input
-                    className="mr-2"
-                    placeholder="Descripcion"
-                    {...register("descripcion",{required: true})}
-                ></Input>
-                <Button className="bg-blue-500 hover:bg-blue-600">Enviar oferta</Button>
-            </form>
+            <RouteGuard>
+                <form className="flex" onSubmit={handleSubmit(onSubmit)}>
+                    <Input
+                        className="mr-2"
+                        placeholder="Descripcion"
+                        {...register("descripcion",{required: true})}
+                    ></Input>
+                    <Button className="bg-blue-500 hover:bg-blue-600">Enviar oferta</Button>
+                </form>
+            </RouteGuard>
         </>
     )
 }

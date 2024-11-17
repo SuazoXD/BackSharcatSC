@@ -7,6 +7,7 @@ import { userPayload } from "../interfaces/userPayload-int";
 import { jwtDecode } from "jwt-decode";
 import ActualizarInfoPupilo from "./pupilo/modificarPerfil-pupilo";
 import ProfileCard from "./pupilo/cardProfile";
+import RouteGuard from "@/components/routeGuard";
 
 export default function ProfileTutorPage() {
 
@@ -45,35 +46,37 @@ export default function ProfileTutorPage() {
 
   return (
     <>
-      {userData?.rol == 1 && (
-        <div className="max-w-4xl mx-auto p-6">
+      <RouteGuard>
+        {userData?.rol == 1 && (
+          <div className="max-w-4xl mx-auto p-6">
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-xl font-bold">
+                  Perfil del Tutor
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                {/* Llama al componente ProfileTutor */}
+                <ProfileTutor />
+              </CardContent>
+            </Card>
+          </div>
+        )}
+        {userData?.rol == 2 && (
           <Card>
-            <CardHeader>
-              <CardTitle className="text-xl font-bold">
-                Perfil del Tutor
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              {/* Llama al componente ProfileTutor */}
-              <ProfileTutor />
-            </CardContent>
+              <CardHeader>
+                  <CardTitle className="text-xl font-bold">Perfil del pupilo</CardTitle>
+              </CardHeader>
+              <CardContent>
+                  {isEditing ? (
+                      <ActualizarInfoPupilo onGoBack={handleGoBack} />
+                  ) : (
+                      <ProfileCard onEditClick={handleEditClick} />
+                  )}
+              </CardContent>
           </Card>
-        </div>
-      )}
-      {userData?.rol == 2 && (
-        <Card>
-            <CardHeader>
-                <CardTitle className="text-xl font-bold">Perfil del pupilo</CardTitle>
-            </CardHeader>
-            <CardContent>
-                {isEditing ? (
-                    <ActualizarInfoPupilo onGoBack={handleGoBack} />
-                ) : (
-                    <ProfileCard onEditClick={handleEditClick} />
-                )}
-            </CardContent>
-        </Card>
-      )}
+        )}
+      </RouteGuard>
     </>
   );
 }

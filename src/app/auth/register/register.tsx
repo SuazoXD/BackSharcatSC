@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
@@ -49,7 +49,11 @@ export default function Register() {
   const [step, setStep] = useState(1);
   const [message, setMessage] = useState("");
   const [showPopup, setShowPopup] = useState(false);
+  const [imgPerfil, setImgPerfil] = useState<File | null>(null);
+  const [filePreviews, setFilePreviews] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
+
 
   // Hooks de react-hook-form para cada paso
   const firstStepForm = useForm<FirstStepData>({
@@ -73,21 +77,53 @@ export default function Register() {
     }
   };
 
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFiles = e.target.files;
+    if(selectedFiles && selectedFiles[0]){
+      const selectedImg = selectedFiles[0];
+      setImgPerfil(selectedImg);
+
+      const preview = URL.createObjectURL(selectedImg);
+      setFilePreviews(preview);
+    }
+  };
+
+  const removeFile = () => {
+    setImgPerfil(null);
+    setFilePreviews(null);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = ""; 
+    }
+  }
+
   const handleRegister = async (data: ThirdStepData) => {
 
-    const formData = {
-      ...firstStepForm.getValues(),
-      ...secondStepForm.getValues(),
-      ...data,
-    };
+    const dataForm = new FormData();
 
+    Object.entries(firstStepForm.getValues()).forEach(([key, value]) => {
+      dataForm.append(key, value);
+    });
+
+    Object.entries(secondStepForm.getValues()).forEach(([key, value]) => {
+      dataForm.append(key, value);
+    });
+
+    Object.entries(data).forEach(([key, value]) => {
+      dataForm.append(key, String(value));
+    });
+
+    if(imgPerfil){
+      dataForm.append('file', imgPerfil);
+    }
+
+    for (const [key, value] of dataForm.entries()) {
+      console.log(`${key}:`, value);
+    }
+    
     try {
       const response = await fetch(`${apiUrl}/auth/sign-up`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
+        body: dataForm,
       });
 
       if (!response.ok) {
@@ -219,6 +255,37 @@ export default function Register() {
               type="tel"
               {...thirdStepForm.register("telefono")}
             />
+            <div>
+              <label className="text-sm text-gray-500" htmlFor="">Imagen de perfil</label>
+              <Input
+                type="file"
+                id="file"
+                accept="images/*"
+                onChange={handleFileChange}
+                ref={fileInputRef}
+              />
+            </div>
+
+            {/* Previsualizar imagen */}
+            <div className="flex flex-wrap gap-4 mt-4">
+              {filePreviews && (
+                <div className="relative">
+                  <img 
+                      src={filePreviews} 
+                      alt={`Preview img`} 
+                      className="max-w-[29vh]  object-cover rounded"
+                  />
+                  <button
+                      type="button"
+                      onClick={() => removeFile()}
+                      className="absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 text-xs"
+                  >
+                      X
+                  </button>
+                </div>
+              )}
+            </div>
+
             <div className="flex space-x-4">
               <label className="flex items-center">
                 <input

@@ -6,6 +6,8 @@ import { getCategories } from "../../home.api";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
+
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
 export default function FormCategoriaMateria() {
@@ -17,6 +19,12 @@ export default function FormCategoriaMateria() {
     const router = useRouter();
 
     const {register, handleSubmit, reset} = useForm<MateriaTutor>();
+
+    const alertAddMateriaSuccess = () => {
+        toast.success("Materia agregada con exito", {
+            position: "top-right"
+        });
+    }
 
     // Llenar las categorias
     useEffect(()=>{
@@ -72,6 +80,7 @@ export default function FormCategoriaMateria() {
                 console.error(errData);
             }
 
+            alertAddMateriaSuccess();
             reset();
             router.refresh();
         } catch (error) {

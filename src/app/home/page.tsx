@@ -6,6 +6,7 @@ import { getQuestionsPupilo, getQuestionsByTutorInteres } from "./home.api";
 import { Question } from "./interfaces/question-interface";
 import { userPayload } from "./interfaces/userPayload-int";
 import QuestionCardDialog from './QuestionCardDialog';
+import RouteGuard from '@/components/routeGuard';
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
@@ -98,61 +99,62 @@ export default function HomePage(){
 
     return (
         <>  
-
-            {userData?.rol === 1 && acceptedQuestions.length > 0 && (
-                <>
-                    <div className="flex justify-center p-4 text-2xl">OFERTAS ACEPTADAS</div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 justify-center">
-                        {acceptedQuestions.map((question) => (
-                            <QuestionCardDialog
-                                key={question.idPregunta}
-                                question={question}
-                                userData={userData}
-                                updateQuestions={updateQuestions}
-                            />
-                        ))}
-                    </div>
-                </>
-            )}
-            {userData?.rol === 2 && acceptedQuestions.length > 0 && (
-                <>
-                    <div className="flex justify-center p-4 text-2xl">PREGUNTAS EN PROCESO</div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 justify-center">
-                        {acceptedQuestions.map((question) => (
-                            <QuestionCardDialog
-                                key={question.idPregunta}
-                                question={question}
-                                userData={userData}
-                                updateQuestions={updateQuestions}
-                            />
-                        ))}
-                    </div>
-                </>
-            )}
-
-            {userData?.rol === 1 && (
-                <div className="flex justify-center p-4 text-2xl">PREGUNTAS RECOMENDADAS</div>
-            )}
-            {userData?.rol === 2 && (
-                <div className="flex justify-center p-4 text-2xl">TUS PREGUNTAS</div>
-            )}
- 
-            {/* CARD */}
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 justify-center">
-                {questions.length > 0 ? (
-                questions.map((question) => (    
-                    <QuestionCardDialog 
-                        key={question.idPregunta}
-                        question={question}
-                        userData={userData}
-                        updateQuestions={updateQuestions}    
-                    />    
-                ))
-                ) : (
-                    <div key="no-questions" className="text-center p-4">No hay preguntas disponibles</div>
+            <RouteGuard>
+                {userData?.rol === 1 && acceptedQuestions.length > 0 && (
+                    <>
+                        <div className="flex justify-center p-4 text-2xl">OFERTAS ACEPTADAS</div>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 justify-center">
+                            {acceptedQuestions.map((question) => (
+                                <QuestionCardDialog
+                                    key={question.idPregunta}
+                                    question={question}
+                                    userData={userData}
+                                    updateQuestions={updateQuestions}
+                                />
+                            ))}
+                        </div>
+                    </>
                 )}
-            </div>
+                {userData?.rol === 2 && acceptedQuestions.length > 0 && (
+                    <>
+                        <div className="flex justify-center p-4 text-2xl">PREGUNTAS EN PROCESO</div>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 justify-center">
+                            {acceptedQuestions.map((question) => (
+                                <QuestionCardDialog
+                                    key={question.idPregunta}
+                                    question={question}
+                                    userData={userData}
+                                    updateQuestions={updateQuestions}
+                                />
+                            ))}
+                        </div>
+                    </>
+                )}
+
+                {userData?.rol === 1 && (
+                    <div className="flex justify-center p-4 text-2xl">PREGUNTAS RECOMENDADAS</div>
+                )}
+                {userData?.rol === 2 && (
+                    <div className="flex justify-center p-4 text-2xl">TUS PREGUNTAS</div>
+                )}
+    
+                {/* CARD */}
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 justify-center">
+                    {questions.length > 0 ? (
+                    questions.map((question) => (    
+                        <QuestionCardDialog 
+                            key={question.idPregunta}
+                            question={question}
+                            userData={userData}
+                            updateQuestions={updateQuestions}    
+                        />    
+                    ))
+                    ) : (
+                        <div key="no-questions" className="text-center p-4">No hay preguntas disponibles</div>
+                    )}
+                </div>
+            </RouteGuard>
         </>
     )
 }

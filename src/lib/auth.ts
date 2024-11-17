@@ -1,18 +1,20 @@
 // utils/auth.js
+import { userPayload } from '@/app/home/interfaces/userPayload-int';
 import {jwtDecode} from 'jwt-decode';
 
-export const getUserDataFromToken = () => {
-  if (typeof window === 'undefined') return null;
-
-  const token = sessionStorage.getItem('access_token');
-  
-  if (!token) return null;
+export const isTokenExpired = (token: string) => {
+  if (!token) return true;
 
   try {
-    const decoded = jwtDecode(token);
-    return decoded;
-  } catch (error) {
-    console.error("Error al decodificar el token:", error);
-    return null;
+    const decodedToken: userPayload = jwtDecode(token);
+    const currentTime = Date.now() / 1000;
+    return decodedToken.exp < currentTime;
+  } catch (e) {
+    console.log(e)
+    return true; 
   }
+};
+
+export const getAccessToken = () => {
+  return sessionStorage.getItem("access_token");
 };

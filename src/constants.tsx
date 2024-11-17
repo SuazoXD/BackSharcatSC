@@ -20,7 +20,7 @@ export const SIDENAV_ITEMS: SideNavItem[] = [
   },
   {
     title: 'Chat',
-    path: '/home',
+    path: '/home/chat',
     icon: <Icon icon="lucide:mail" width="24" height="24" />,
   },
   {

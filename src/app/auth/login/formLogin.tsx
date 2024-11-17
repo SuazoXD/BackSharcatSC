@@ -6,6 +6,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import {z} from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 const loginSchema = z.object({
     correo: z
@@ -28,6 +29,12 @@ export default function FormLogin() {
         resolver: zodResolver(loginSchema),
     });
 
+    const alertError = (message:string) => {
+      toast.warning(`${message}`, {
+          position: "top-center"
+      });
+    }
+
     const onSubmit: SubmitHandler<loginDto> = async (data) => {
         if (!apiUrl) {
           console.error("La URL de la API no está configurada.");
@@ -44,8 +51,7 @@ export default function FormLogin() {
           });
     
           if (!res.ok) {
-            const errorData = await res.json(); 
-            console.error("Error del servidor:", errorData.message || errorData);
+            alertError("Correo o contraseña invalidos");
             return;
           }
     
